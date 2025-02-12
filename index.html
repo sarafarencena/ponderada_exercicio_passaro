@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- os símbolol <> abrem as tags e os </...> fecham tags (palavras reservadas: body, head,...) -->
+
+<!-- head, tudo que não aparece na tela do navegdor, executada antes da tela ser carregada -->
+<head>
+
+    <!-- UTF-8 mostra que está na linguagem padrão, sem acentos ou caracteres especiais -->
+    <meta charset="UTF-8">
+
+    <!-- width=device-width serve para a tela se ajustar a largura do aparelho -->
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+
+    <!-- quando colocamos o link do js, estamos buscando ele da web, ao inves de carregar o framework no arquivo/código -->
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+
+    <!-- title, é o que aparece como título na guia do navegador -->
+    <title>Exercício do Pássaro</title>
+
+    <!-- style, tudo é CSS, estilização, deixar bonitinho-->
+    <style>
+        body {
+            display: flex;
+
+            /* justify-content, serve para escolher onde alinhar a tela horizontalmente (centro, esquerda, direita) */
+            justify-content: center;
+
+            /* align-items, serve para escolher onde alinhar a tela verticalmente (centro, esquerda, direita) */
+            align-items: center;
+
+            /* vh = view height (o numero na frente correspondde a porcentagem de tela que eu quero que a tag ocupe, nesse caso o body)*/
+            height: 100vh;
+
+            /* por padrão vem com 1px, mas colocamos 0 para não ter margem nenhuma, remover esse padrão/limite */
+            margin: 0;
+
+        }
+
+    </style>
+</head>
+
+<!-- body, tudo o que é visual, que aparece na tela do navegador, ou algo que rode JS (como o Phaser, nesse caso), tudo o que está no body acontece depois que a tela já está criada -->
+<body>
+    <script>
+        // var vem de variável, variáveis são gavetas de um armário que guardam informações
+        // config é um dicionário, palavra: outra palavra -> uma coisa corresponde a outra
+        var config = {
+            type: Phaser.AUTO,
+            // nessa parte de width e height vem o tamanho da janela do Phaser
+            width: 800,
+            height: 600,
+
+            scene: {
+                // preload, para carregar os assets, só acontece uma vez
+                preload: preload,
+
+                // create, para colocar assets carregados no preload, só acontece uma vez
+                create: create,
+
+                // update, sempre em looping, serve para movimentação dos assets (ex: andar na horizontal, usa o x)
+                update: update
+            }
+        };
+
+        // usa a caixa de ferramentas que é o Phaser
+        var game = new Phaser.Game(config);
+
+        // a ordem importa, pra eu fazer preload, create e update a variável precisa existir
+        var passarinho;
+        
+        function preload() {
+            // imagem normal
+            this.load.image('bg','assets/bg_space.png');
+            // imagem com vários frames
+            this.load.spritesheet('bird', 'assets/bird-red.png', {frameWidth: 75, frameHeight: 75})
+        }
+        
+        function create() { 
+            // x e y do posicionamento inicial do item/asset na tela
+            this.add.image(400, 300, 'bg').setScale(1.2);
+            // x e y do posicionamento inicial do item/asset na tela
+            passarinho = this.add.sprite(100, 300, 'bird').setScale(1.3);
+            
+            // setScale o número dentro dele é o tanto de zoom que estou dando na imagem
+            
+            // criando a animação, trocando entre os frames
+            this.anims.create({
+                key: 'fly',
+                // tudo na programação o primeiro número sempre é zero
+                frames: this.anims.generateFrameNumbers('bird', {start: 0, end: 7}),
+                // velocidade das trocas das sprites (quadrados)
+                frameRate: 10,
+                // looping
+                repeat: -1
+
+            });
+
+            // a animação fly será aplicada no passarinho
+            passarinho.anims.play('fly', true);
+
+        }
+
+        function update() { 
+
+        }
+
+    </script>
+
+</body>
+
+</html>
