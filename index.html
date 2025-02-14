@@ -80,7 +80,7 @@
             // x e y do posicionamento inicial do item/asset na tela
             this.add.image(400, 300, 'bg').setScale(1.2);
             // x e y do posicionamento inicial do item/asset na tela
-            passarinho = this.add.sprite(100, 300, 'bird').setScale(1.3);
+            passarinho = this.add.sprite(100, 100, 'bird').setScale(1.3);
             
             // setScale o número dentro dele é o tanto de zoom que estou dando na imagem
             
@@ -101,8 +101,57 @@
 
         }
 
-        function update() { 
+        // um = para afirmar
+        // dois == para perguntar
+        // três === pergunta para afirmar com exatidão, até o tipo da variável (ex: você é/está nisso mesmo?)
 
+        let ida
+        let subida
+        function update() { 
+            // Se o passarinho estiver na coordernada 100 do eixo x, ele não inverte a imagem mas está na trajetória de ida
+            if(passarinho.x === 100){
+                passarinho.setFlip(false, false);
+                ida = true;
+            }
+
+            // Se o passarinho está na coordenada 700 do eixo x, ele inverte e está na trajetória de volta
+            if(passarinho.x === 700){
+                passarinho.setFlip(true, false);
+                ida = false
+            }
+
+            // Se o passarinho está em uma coordenada do eixo x menor que 700 e sua ida é verdadeira ele anda 5
+            if (passarinho.x <= 700 && ida === true) {
+                // o valor 5 é relacinado a quantidade de pixels
+                passarinho.x += 5
+                console.log("o passarinho está indo")
+            }
+            
+            // Se o passarinho está em uma coordenada maior que 100 no eixo x e sua ida é falsa, ele volta 5
+            if (passarinho.x > 100 && ida === false) {
+                passarinho.x -= 5
+                console.log("o passarinho está voltando")
+            }
+
+            // Se o passarinho estiver na coordenada 100 do eixo y, ele está na trajetória para subir
+            if(passarinho.y === 100){
+                subida = true;
+            }
+
+            // Se o passarinho estiver na coordenada 500 eixo y, sua subida é falsa
+            if(passarinho.y === 500){
+                subida = false
+            }
+
+            // Se o passarinho está em uma coordenada do eixo y menor que 500 e sua subida é true, ele sobe 1
+            if(passarinho.y <= 500 && subida === true){
+                passarinho.y += 1;
+            }
+
+            // Se o passarinho está em uma coordenada do eixo y maior que 100 e sua subida é false, ele desce 1
+            if(passarinho.y > 100 && subida === false){
+                passarinho.y -= 1;
+            }
         }
 
     </script>
