@@ -71,7 +71,8 @@
         
         function preload() {
             // imagem normal de fundo
-            this.load.image('bg','assets/bg_space.png');
+            // this.load.image('bg','assets/bg_space.png');
+            this.load.image('bg', 'assets/bgPaisagem.png');
             // imagem da nuvem
             this.load.image('nuvem', 'assets/nuvem.png');
             // imagem com vários frames
@@ -80,11 +81,11 @@
         
         function create() { 
             // x e y do posicionamento inicial do item/asset na tela
-            this.add.image(400, 300, 'bg').setScale(1.2);
+            this.add.image(400, 300, 'bg').setScale(1);
             // i é a variável, respeita cada uma das condições; i nasce igual a 1, enquanto o i for menor que 4 o for é executado e i++ soma mais um
-            for (let i = 1; i < 4; i++) {
+            for (let i = 2; i < 4; i++) {
                 // 180 * i representa a posição do asset no eixo x e 100 no eixo y
-                this.add.image(180 * i, 100, 'nuvem').setScale(0.4);
+                this.add.image(8.9 ** i, 110, 'nuvem').setScale(0.4);
             }
             
             // x e y do posicionamento inicial do item/asset na tela
