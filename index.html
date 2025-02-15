@@ -70,10 +70,12 @@
         var passarinho;
         
         function preload() {
-            // imagem normal
+            // imagem normal de fundo
             this.load.image('bg','assets/bg_space.png');
             // imagem com vários frames
-            this.load.spritesheet('bird', 'assets/bird-red.png', {frameWidth: 75, frameHeight: 75})
+            this.load.spritesheet('bird', 'assets/bird-red.png', {frameWidth: 75, frameHeight: 75});
+            // imagem da nuvem
+            this.load.image('nuvem', 'assets/nuvem.png');
         }
         
         function create() { 
@@ -81,6 +83,13 @@
             this.add.image(400, 300, 'bg').setScale(1.2);
             // x e y do posicionamento inicial do item/asset na tela
             passarinho = this.add.sprite(100, 100, 'bird').setScale(1.3);
+            
+            // i é a variável, respeita cada uma das condições; i nasce igual a 1, enquanto o i for menor que 4 o for é executado e i++ soma mais um
+            for (let i = 1; i < 4; i++) {
+                // 180 * i representa a posição do asset no eixo x e 100 no eixo y
+                this.add.image(180 * i, 100, 'nuvem').setScale(0.4);
+            }
+
             
             // setScale o número dentro dele é o tanto de zoom que estou dando na imagem
             
